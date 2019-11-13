@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {{ form }}
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+    {% for img in images %}
+    <div>
+        <img src=".{{ img }}">
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

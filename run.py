@@ -1,9 +1,8 @@
 import argparse
 import os
-import numpy as np
 
 from utils import load_images, load_face_information, load_image, cache_face_information
-from core import process_images, encode_face, find_images_with_person
+from ml.core import process_images, encode_face, find_images_with_person
 
 cache_file = '/cache.pickle'
 

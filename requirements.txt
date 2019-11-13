@@ -1,2 +1,4 @@
 keras-facenet
 mtcnn==0.0.9
+Keras==2.3.1
+tensorflow==1.14

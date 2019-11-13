@@ -1,0 +1,12 @@
+Django==2.2.7
+psycopg2-binary==2.8.4
+djangorestframework==3.10.3
+Jinja2==2.10
+requests==2.22.0
+keras-facenet
+mtcnn==0.0.9
+Keras==2.3.1
+tensorflow==1.14
+tqdm
+matplotlib
+Pillow
