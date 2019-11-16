@@ -32,3 +32,9 @@ Service Links:
 
 - Page to upload files: http://localhost:8000/images
 - Page to search by file: http://localhost:8000/search
+
+
+Download dataset for face detection evaluation:
+```bash
+python evaluation_dataset_loader.py data/face_detection.json data/metrics_dataset
+```
