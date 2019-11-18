@@ -74,9 +74,19 @@ class ImageLoader:
             img = load_image(img_path)
             if not self.return_full_path:
                 img_path = os.path.split(img_path)[1]
-            return img_path, img
+            return os.path.normpath(img_path), img
 
 
     def __getitem__(self, ind):
         img_path = self.image_paths[ind]
         return self.__return_path_and_img(img_path)
+
+
+def read_json(path):
+    with open(path) as input_file:
+        return json.loads(input_file)
+
+def write_json(obj, path, default=None):
+    os.makedirs(os.path.split(path)[0], exist_ok=True)
+    with open(path, 'w') as output_file:
+        json.dump(obj, output_file, default=default, indent=4)
