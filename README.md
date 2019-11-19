@@ -36,5 +36,7 @@ Service Links:
 
 Download dataset for face detection evaluation:
 ```bash
-python evaluation_dataset_loader.py data/face_detection.json data/metrics_dataset
+python evaluation_dataset_loader.py data/face_detection.json data/detection_metrics_dataset
 ```
+
+Code of */lib* module was taken from https://github.com/rafaelpadilla/Object-Detection-Metrics public repository.
