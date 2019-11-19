@@ -7,10 +7,9 @@ from index.models import FaceIndex
 __all__ = ['upload_files', 'search_for_face']
 
 
-def upload_files(request):
-    for field in request.FILES.keys():
-        for f in request.FILES.getlist(field):
-            handle_image(f)
+def upload_files(request, key):
+    for f in request.FILES.getlist(key):
+        handle_image(f)
 
 
 def handle_image(f):
@@ -53,16 +52,22 @@ def search_for_face(request):
     img = MachineLearningModel.face_reg.load_from_file(f)
     f.close()
 
-    face_vector = MachineLearningModel.face_reg.encode_face(img)
+    current_face_vector = MachineLearningModel.face_reg.encode_face(img).reshape(1, -1)
 
     face_information = {}
     for face in FaceIndex.objects.all():
         url = face.image_id.image.url
+        print(f"IMAGE URL {url}")
         face_vector = np.array(face.face_vector)
         face_information.setdefault(url, []).append(face_vector)
 
+    for u, f in face_information.items():
+        face_information[u] = np.array(f)
+
     urls = MachineLearningModel.face_reg.find_images_with_person(
-        face_vector, face_information
+        current_face_vector, face_information
     )
+
+    print(f"IMAGE URLS {urls}")
 
     return urls

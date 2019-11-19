@@ -2,7 +2,7 @@ from django import forms
 
 
 class UploadImageForm(forms.Form):
-    image = forms.ImageField()
+    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
 
 class SearchImageForm(forms.Form):

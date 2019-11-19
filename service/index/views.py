@@ -11,7 +11,7 @@ __all__ = ['images_page']
 @csrf_exempt
 def images_page(request):
     if request.method == 'POST':
-        upload_files(request)
+        upload_files(request, 'images')
 
     form = UploadImageForm()
     images = ImageIndex.objects.all()
@@ -22,6 +22,7 @@ def images_page(request):
     }
 
     return render(request, 'images.html', out)
+
 
 @csrf_exempt
 def search_page(request):
