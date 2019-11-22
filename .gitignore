@@ -1,3 +1,5 @@
+data/detection_metrics_dataset/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
