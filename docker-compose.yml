@@ -25,6 +25,7 @@ services:
       DB_USER: ${DB_USER}
       DB_NAME: ${DB_NAME}
       DB_PASSWORD: ${DB_PASSWORD}
+      ALLOW_INPUT: ${ALLOW_INPUT}
 
 volumes:
   postgres-data:

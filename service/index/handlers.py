@@ -52,22 +52,27 @@ def search_for_face(request):
     img = MachineLearningModel.face_reg.load_from_file(f)
     f.close()
 
-    current_face_vector = MachineLearningModel.face_reg.encode_face(img).reshape(1, -1)
+    try:
+        current_face_vector = MachineLearningModel.face_reg.encode_face(img).reshape(1, -1)
 
-    face_information = {}
-    for face in FaceIndex.objects.all():
-        url = face.image_id.image.url
-        print(f"IMAGE URL {url}")
-        face_vector = np.array(face.face_vector)
-        face_information.setdefault(url, []).append(face_vector)
+        face_information = {}
+        for face in FaceIndex.objects.all():
+            url = face.image_id.image.url
+            print(f"IMAGE URL {url}")
+            face_vector = np.array(face.face_vector)
+            face_information.setdefault(url, []).append(face_vector)
 
-    for u, f in face_information.items():
-        face_information[u] = np.array(f)
+        for u, f in face_information.items():
+            face_information[u] = np.array(f)
 
-    urls = MachineLearningModel.face_reg.find_images_with_person(
-        current_face_vector, face_information
-    )
+        urls = MachineLearningModel.face_reg.find_images_with_person(
+            current_face_vector, face_information
+        )
 
-    print(f"IMAGE URLS {urls}")
+        print(f"IMAGE URLS {urls}")
 
-    return urls
+        return urls
+    except:
+        return []
+
+

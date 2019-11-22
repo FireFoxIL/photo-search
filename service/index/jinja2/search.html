@@ -2,15 +2,42 @@
 
 {% block content %}
 <div>
-    <form method="post" enctype="multipart/form-data" novalidate>
-        {{ form }}
-        <button type="submit" class="btn btn-info">Search</button>
-    </form>
-    {% for img in images %}
-    <div>
-        <img src=".{{ img }}">
+    <div class="section">
+        <div class="container">
+            <div class="title">Search</div>
+            <form method="post" enctype="multipart/form-data" novalidate>
+                <div class="field has-addons">
+                    <div class="control">
+                        <input class="input" type="file"  name="images" multiple>
+                    </div>
+                    <div class="control">
+                        <button class="button is-info" type="submit">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+            {% if is_empty %}
+            <div class="section">
+                <div class="subtitle">No images were found :(</div>
+            </div>
+            {% endif %}
+        </div>
     </div>
-
+    {% for imgs in images | batch(3) %}
+    <div class="columns has-same-height">
+        {% for img in imgs %}
+        <div class="column is-4">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image">
+                        <img src=".{{ img }}">
+                    </figure>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
